@@ -1,31 +1,34 @@
 #include "GameController.hpp"
-#include "Window.hpp"
+#include "DisplayManager.hpp"
 #include <iostream>
 
 // Constructor
-GameController::GameController() : running(true), window(nullptr) { init(); }
+GameController::GameController() : running(true), displayManager(nullptr) {
+    init();
+}
 
 // Destructor
 GameController::~GameController() { clean(); }
 
-// Initialize SDL and create window/renderer
+// Initialize SDL and create displayManager/renderer
 void GameController::init() {
-    createWindow();
-    if (!window) {
-        std::cerr << "Window could not be created" << std::endl;
+    createDisplayManager();
+    if (!displayManager) {
+        std::cerr << "displayManager could not be created" << std::endl;
         running = false;
     }
-    if (!window || !window->isInitialized()) {
-        std::cerr << "Window or renderer could not be created" << std::endl;
+    if (!displayManager || !displayManager->isInitialized()) {
+        std::cerr << "displayManager or renderer could not be created"
+                  << std::endl;
         running = false;
     }
 }
 
-void GameController::createWindow() {
-    window = std::make_unique<Window>("My Game", 800, 600);
+void GameController::createDisplayManager() {
+    displayManager = std::make_unique<DisplayManager>("My Game", 800, 600);
 }
 
-// Handle events (window close, input, etc.)
+// Handle events (displayManager close, input, etc.)
 void GameController::handleEvents() {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
@@ -40,10 +43,10 @@ void GameController::update() {}
 
 // Render everything
 void GameController::render() {
-    window->clear();
+    displayManager->clear();
     // Test drawing a rectangle
-    window->drawRect(100, 100, 50, 50);
-    window->present();
+    displayManager->drawRect(100, 100, 50, 50);
+    displayManager->present();
 }
 
 // Cleanup function

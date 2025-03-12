@@ -1,7 +1,7 @@
 #ifndef GAMECONTROLLER_HPP
 #define GAMECONTROLLER_HPP
 
-#include "Window.hpp"
+#include "DisplayManager.hpp"
 #include <memory>
 
 class GameController {
@@ -12,15 +12,15 @@ class GameController {
     void run(); // Starts the game loop
 
   private:
-    void init();         // Initializes SDL and the window
-    void createWindow(); // Initializes the window
-    void handleEvents(); // Processes input/events
-    void update();       // Updates game state
-    void render();       // Draws everything
-    void clean();        // Cleans up memory
+    void init();                 // Initializes SDL and the window
+    void createDisplayManager(); // Initializes the window
+    void handleEvents();         // Processes input/events
+    void update();               // Updates game state
+    void render();               // Draws everything
+    void clean();                // Cleans up memory
 
     bool running;
-    std::unique_ptr<Window> window;
+    std::unique_ptr<DisplayManager> displayManager;
 };
 
 #endif // GAMECONTROLLER_HPP

@@ -1,13 +1,13 @@
-#ifndef WINDOW_HPP
-#define WINDOW_HPP
+#ifndef DISPLAYMANAGER_HPP
+#define DISPLAYMANAGER_HPP
 
 #include <SDL.h>
 #include <string>
 
-class Window {
+class DisplayManager {
   public:
-    Window(const std::string &title, int width, int height);
-    ~Window();
+    DisplayManager(const std::string &title, int width, int height);
+    ~DisplayManager();
 
     void clear();
     void present();
@@ -27,4 +27,4 @@ class Window {
     SDL_Renderer *renderer;
 };
 
-#endif // WINDOW_HPP
+#endif
