@@ -1,6 +1,8 @@
 #include "Scene.hpp"
 #include "DisplayManager.hpp"
 #include "Entity.hpp"
+#include "GameController.hpp"
+#include "objects/RedRectangle.hpp"
 #include <algorithm>
 
 Scene::Scene(DisplayManager *displayManager, GameController *gameController)
@@ -9,7 +11,13 @@ Scene::Scene(DisplayManager *displayManager, GameController *gameController)
 
 Scene::~Scene() { clean(); }
 
-void Scene::init() {}
+void Scene::init() {
+    // For now we create a red rectangle for testing
+    auto redRectangle =
+        std::make_unique<RedRectangle>(displayManager, gameController);
+    redRectangle->init();
+    addEntity(std::move(redRectangle));
+}
 
 void Scene::update() {
     for (auto &entity : entities) {

@@ -25,6 +25,16 @@ But trying to think of how to keep it really organised and modular and future-pr
 * Job's a fish?
 * Job's a fish.
 
+### Make Game Start Function
+
+* GameController should have gameStart() method.
+* Basically just loads up the first scene and gets everything going.
+* This is the fifrst thing called by game.run()
+
+### Make Common Header File
+
+* Contains shit like constants and StartingScene and whatever idk
+
 ### Set Up Input Handling
 
 * InputController: Create a general InputController class.

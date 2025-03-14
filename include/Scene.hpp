@@ -1,6 +1,3 @@
-// TODO: Scene class declaration
-// Will contain a list of entities
-
 #ifndef SCENE_HPP
 #define SCENE_HPP
 
@@ -9,6 +6,9 @@
 #include "GameController.hpp"
 #include <memory>
 #include <vector>
+
+class GameController;
+class Entity;
 
 class Scene {
   public:

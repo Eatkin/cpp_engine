@@ -2,7 +2,11 @@
 #define GAMECONTROLLER_HPP
 
 #include "DisplayManager.hpp"
+#include "Scene.hpp"
 #include <memory>
+
+// Forward declaration to avoid circular dependency or some shit
+class Scene;
 
 class GameController {
   public:
@@ -21,6 +25,7 @@ class GameController {
 
     bool running;
     std::unique_ptr<DisplayManager> displayManager;
+    Scene *currentScene;
 };
 
 #endif // GAMECONTROLLER_HPP

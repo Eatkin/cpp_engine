@@ -1,5 +1,6 @@
 #include "GameController.hpp"
 #include "DisplayManager.hpp"
+#include "Scene.hpp"
 #include <iostream>
 
 // Constructor
@@ -22,6 +23,9 @@ void GameController::init() {
                   << std::endl;
         running = false;
     }
+
+    // Create the scene
+    currentScene = new Scene(displayManager.get(), this);
 }
 
 void GameController::createDisplayManager() {
@@ -39,10 +43,17 @@ void GameController::handleEvents() {
 }
 
 // Logic for updating game state goes here
-void GameController::update() {}
+void GameController::update() {
+    if (currentScene) {
+        currentScene->update();
+    }
+}
 
 // Render everything
 void GameController::render() {
+    if (currentScene) {
+        currentScene->render();
+    }
     displayManager->clear();
     // Test drawing a rectangle
     displayManager->drawRect(100, 100, 50, 50);
@@ -50,7 +61,14 @@ void GameController::render() {
 }
 
 // Cleanup function
-void GameController::clean() {}
+void GameController::clean() {
+    if (currentScene) {
+        delete currentScene;
+        currentScene = nullptr;
+    }
+    displayManager.reset();
+    SDL_Quit();
+}
 
 // Main game loop
 void GameController::run() {

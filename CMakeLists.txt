@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
 # Find all .cpp files in src/ and store them in a variable
-file(GLOB_RECURSE SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp)
+file(GLOB_RECURSE SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp ${CMAKE_SOURCE_DIR}/src/objects/*.cpp)
 
 # Create the executable from all source files
 add_executable(Sokoban ${SOURCES})
