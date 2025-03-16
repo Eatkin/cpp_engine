@@ -7,7 +7,9 @@
 
 Scene::Scene(DisplayManager *displayManager, GameController *gameController)
     : displayManager(displayManager), gameController(gameController),
-      running(true) {}
+      running(true) {
+    init();
+}
 
 Scene::~Scene() { clean(); }
 
@@ -26,7 +28,6 @@ void Scene::update() {
 }
 
 void Scene::render() {
-    displayManager->clear();
     for (auto &entity : entities) {
         entity->render();
     }

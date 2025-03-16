@@ -21,6 +21,7 @@ class Entity {
     int getId() { return id; }
 
   protected:
+    float deltaTime;
     static int nextId;
     int id;
     DisplayManager *displayManager;

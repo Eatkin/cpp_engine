@@ -14,7 +14,7 @@ Entity::~Entity() { clean(); }
 
 void Entity::init() { id = nextId++; }
 
-void Entity::update() {}
+void Entity::update() { deltaTime = gameController->getDeltaTime(); }
 
 void Entity::render() {}
 

@@ -3,6 +3,7 @@
 
 #include "DisplayManager.hpp"
 #include "Scene.hpp"
+#include <chrono>
 #include <memory>
 
 // Forward declaration to avoid circular dependency or some shit
@@ -14,6 +15,7 @@ class GameController {
     ~GameController();
 
     void run(); // Starts the game loop
+    float getDeltaTime() { return this->deltaTime; }; // Delta time getter
 
   private:
     void init();                 // Initializes SDL and the window
@@ -23,6 +25,8 @@ class GameController {
     void render();               // Draws everything
     void clean();                // Cleans up memory
 
+    std::chrono::steady_clock::time_point lastTime;
+    float deltaTime = 0;
     bool running;
     std::unique_ptr<DisplayManager> displayManager;
     Scene *currentScene;

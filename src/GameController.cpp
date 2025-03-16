@@ -1,6 +1,7 @@
 #include "GameController.hpp"
 #include "DisplayManager.hpp"
 #include "Scene.hpp"
+#include <chrono>
 #include <iostream>
 
 // Constructor
@@ -26,6 +27,11 @@ void GameController::init() {
 
     // Create the scene
     currentScene = new Scene(displayManager.get(), this);
+
+    std::cout << "GameController initialized" << std::endl;
+
+    // Setup the clock
+    lastTime = std::chrono::steady_clock::now();
 }
 
 void GameController::createDisplayManager() {
@@ -44,6 +50,13 @@ void GameController::handleEvents() {
 
 // Logic for updating game state goes here
 void GameController::update() {
+    // Calculate deltaTime
+    auto now = std::chrono::steady_clock::now();
+    std::chrono::duration<float> elapsedTime = now - lastTime;
+    deltaTime = elapsedTime.count();
+    lastTime = now;
+
+    // Work down the chain of responsibility
     if (currentScene) {
         currentScene->update();
     }
@@ -51,12 +64,10 @@ void GameController::update() {
 
 // Render everything
 void GameController::render() {
+    displayManager->clear();
     if (currentScene) {
         currentScene->render();
     }
-    displayManager->clear();
-    // Test drawing a rectangle
-    displayManager->drawRect(100, 100, 50, 50);
     displayManager->present();
 }
 
