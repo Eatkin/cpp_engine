@@ -19,7 +19,6 @@ class RedRectangle : public Entity {
   private:
     SDL_Rect rect;
     SDL_Color color;
-    float x, y;
 };
 
 #endif

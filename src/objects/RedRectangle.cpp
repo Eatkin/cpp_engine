@@ -1,12 +1,14 @@
 #include "objects/RedRectangle.hpp"
 #include "DisplayManager.hpp"
 #include "GameController.hpp"
+#include "components/PositionComponent.hpp"
 #include <iostream>
 
 RedRectangle::RedRectangle(DisplayManager *displayManager,
                            GameController *gameController)
     : Entity(displayManager, gameController) {
     init();
+    auto *position = addComponent<PositionComponent>(0.0f, 0.0f);
 }
 
 RedRectangle::~RedRectangle() { clean(); }
@@ -14,8 +16,7 @@ RedRectangle::~RedRectangle() { clean(); }
 void RedRectangle::init() {
     Entity::init();
     color = {255, 0, 0, 255};
-    x = 0;
-    y = 0;
+    auto [x, y] = getPosition();
     rect = {static_cast<int>(x), static_cast<int>(y), 100, 100};
     std::cout << "RedRectangle initialized" << std::endl;
 }
@@ -29,10 +30,10 @@ void RedRectangle::render() {
 
 void RedRectangle::update() {
     Entity::update();
-    int xx = static_cast<int>(x);
-    int yy = static_cast<int>(y);
-    x += deltaTime * 10;
-    y += deltaTime * 10;
+    auto *position = getComponent<PositionComponent>();
+    position->x += deltaTime * 100;
+    position->y += deltaTime * 100;
+    auto [x, y] = getPosition();
     rect = {static_cast<int>(x), static_cast<int>(y), 100, 100};
 }
 void RedRectangle::clean() { Entity::clean(); }
