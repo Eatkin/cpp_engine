@@ -8,32 +8,15 @@ But trying to think of how to keep it really organised and modular and future-pr
 
 ## What to Actually Do
 
-### Finalise Scene and Entity Structure
-
-* Make sure Scene and Entity classes are set up properly.
-* Implement basic methods in Scene for init(), update(), render(), clean().
-* For Entity, ensure there's a render() and update() method (or whatever makes sense for your game entities).
-
-### Render all the way up
-
-* Scene calls render on entity (perhaps entity should have a visible attribute).
-* SceneManager calls render on active Scene (when there's a SceneManager)
-* GameController calls render on SceneManager and actually renders the scene.
-* Job done.
-* Job's a good'un.
-* Job's a fish.
-* Job's a fish?
-* Job's a fish.
-
-### Make Game Start Function
-
-* GameController should have gameStart() method.
-* Basically just loads up the first scene and gets everything going.
-* This is the fifrst thing called by game.run()
-
 ### Make Common Header File
 
 * Contains shit like constants and StartingScene and whatever idk
+
+CHILD OBJECTS INHERIT THEIR CONSTRUCTORS LITERALLY
+Calling init() calls parent init
+therefore virtual void init in parent class will break things
+so we need to recreate the constructor
+which is fucking stupid what the hell c++
 
 ### Set Up Input Handling
 
@@ -48,6 +31,33 @@ But trying to think of how to keep it really organised and modular and future-pr
 * Add InputController (or KeyboardController) as an attribute of GameController.
 * GameController should initialize and manage the InputController instance.
 * Implement a way for the GameController to pass relevant input data to the Scene (scene references GameController so it can access input data also).
+
+### Components and Animators
+#### Create Component Base Class:
+
+* Well I've already done that but it needs update and render methods
+* Entities can loop over the update and render methods
+
+#### Create Animator Component:
+
+* Create an Animator class that holds multiple Animation objects.
+* Use an unordered map to store animations by name (e.g., "run", "jump").
+* Include basic animation functionality like setting, changing, and updating the active animation.
+* Animation class will hold information such as sprite sheet data, frame rate (FPS), and frame sizes.
+
+#### Create Animation Class:
+
+* Define an Animation class that stores data for a single animation: sprite sheet reference, frame size, frame count, and speed (FPS).
+* Optionally add a way to specify the starting frame and looping behavior.
+
+#### Sprite Class:
+
+* Create a Sprite class for rendering an individual sprite from an animation.
+* The sprite class can be responsible for rendering the current frame of the active animation.
+
+#### I guesss implement and test it
+
+Yep let's make red rectangle go brrrr
 
 ### Layer Class
 

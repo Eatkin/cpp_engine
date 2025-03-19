@@ -6,6 +6,7 @@ class Component {
     virtual ~Component() = default;
     virtual void update() {}
     virtual void render() {}
+    virtual void clean() {}
 };
 
 #endif

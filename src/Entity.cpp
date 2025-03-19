@@ -29,6 +29,12 @@ void Entity::render() {
     }
 }
 
+void Entity::render_end() {
+    // Reset the render draw color to black
+    auto renderer = displayManager->getRenderer();
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+}
+
 std::pair<float, float> Entity::getPosition() {
     if (auto *position = getComponent<PositionComponent>()) {
         return {position->x, position->y};
@@ -36,4 +42,9 @@ std::pair<float, float> Entity::getPosition() {
     return {0.0f, 0.0f};
 }
 
-void Entity::clean() {}
+void Entity::clean() {
+    for (auto &component : components) {
+        component->clean();
+    }
+    components.clear();
+}

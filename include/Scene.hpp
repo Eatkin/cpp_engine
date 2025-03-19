@@ -15,7 +15,7 @@ class Scene {
     Scene(DisplayManager *displayManager, GameController *gameController);
     ~Scene();
 
-    void init();
+    virtual void init();
     void update();
     void render();
     void clean();
@@ -26,9 +26,11 @@ class Scene {
     void stop() { running = false; }
     void start() { running = true; }
 
-  private:
+  protected:
     DisplayManager *displayManager;
     GameController *gameController;
+
+  private:
     std::vector<std::unique_ptr<Entity>> entities;
     bool running;
 };

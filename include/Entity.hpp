@@ -36,6 +36,7 @@ class Entity {
     virtual void init();
     virtual void update();
     virtual void render();
+    virtual void render_end();
     virtual void clean();
 
     // Assign a unique id to each entity

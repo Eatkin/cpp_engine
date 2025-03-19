@@ -14,7 +14,7 @@ class GameController {
     GameController();
     ~GameController();
 
-    void run(); // Starts the game loop
+    void run();                                       // Starts the game loop
     float getDeltaTime() { return this->deltaTime; }; // Delta time getter
 
   private:

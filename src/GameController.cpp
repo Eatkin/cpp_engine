@@ -1,6 +1,7 @@
 #include "GameController.hpp"
 #include "DisplayManager.hpp"
 #include "Scene.hpp"
+
 #include <chrono>
 #include <iostream>
 
@@ -26,6 +27,7 @@ void GameController::init() {
     }
 
     // Create the scene
+    // currentScene = new Scene(displayManager.get(), this);
     currentScene = new Scene(displayManager.get(), this);
 
     std::cout << "GameController initialized" << std::endl;
