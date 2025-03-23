@@ -1,14 +1,13 @@
 #include "GameController.hpp"
 #include "DisplayManager.hpp"
+#include "InputHandler.hpp"
 #include "Scene.hpp"
 
 #include <chrono>
 #include <iostream>
 
 // Constructor
-GameController::GameController() : running(true), displayManager(nullptr) {
-    init();
-}
+GameController::GameController() : running(true) { init(); }
 
 // Destructor
 GameController::~GameController() { clean(); }
@@ -27,13 +26,15 @@ void GameController::init() {
     }
 
     // Create the scene
-    // currentScene = new Scene(displayManager.get(), this);
-    currentScene = new Scene(displayManager.get(), this);
-
-    std::cout << "GameController initialized" << std::endl;
+    currentScene = std::make_unique<Scene>(displayManager.get(), this);
 
     // Setup the clock
     lastTime = std::chrono::steady_clock::now();
+
+    // Setup input handler
+    inputHandler = std::make_unique<InputHandler>();
+
+    std::cout << "GameController initialized" << std::endl;
 }
 
 void GameController::createDisplayManager() {
@@ -47,6 +48,8 @@ void GameController::handleEvents() {
         if (event.type == SDL_QUIT) {
             running = false;
         }
+        // Pass relevant events to the input handler
+        inputHandler->handleInput(event);
     }
 }
 
@@ -62,6 +65,16 @@ void GameController::update() {
     if (currentScene) {
         currentScene->update();
     }
+
+    postUpdate();
+}
+
+void GameController::postUpdate() {
+    // Input handler update goes at the end to ensure pressed/release states are
+    // accurate and reset
+    if (inputHandler) {
+        inputHandler->run();
+    }
 }
 
 // Render everything
@@ -75,10 +88,6 @@ void GameController::render() {
 
 // Cleanup function
 void GameController::clean() {
-    if (currentScene) {
-        delete currentScene;
-        currentScene = nullptr;
-    }
     displayManager.reset();
     SDL_Quit();
 }

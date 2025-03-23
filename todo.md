@@ -8,16 +8,6 @@ But trying to think of how to keep it really organised and modular and future-pr
 
 ## What to Actually Do
 
-### Make Common Header File
-
-* Contains shit like constants and StartingScene and whatever idk
-
-CHILD OBJECTS INHERIT THEIR CONSTRUCTORS LITERALLY
-Calling init() calls parent init
-therefore virtual void init in parent class will break things
-so we need to recreate the constructor
-which is fucking stupid what the hell c++
-
 ### Set Up Input Handling
 
 * InputController: Create a general InputController class.

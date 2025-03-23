@@ -2,12 +2,14 @@
 #define GAMECONTROLLER_HPP
 
 #include "DisplayManager.hpp"
+#include "InputHandler.hpp"
 #include "Scene.hpp"
 #include <chrono>
 #include <memory>
 
 // Forward declaration to avoid circular dependency or some shit
 class Scene;
+class InputHandler;
 
 class GameController {
   public:
@@ -22,6 +24,7 @@ class GameController {
     void createDisplayManager(); // Initializes the window
     void handleEvents();         // Processes input/events
     void update();               // Updates game state
+    void postUpdate();           // Any post-update cleanup jobs
     void render();               // Draws everything
     void clean();                // Cleans up memory
 
@@ -29,7 +32,8 @@ class GameController {
     float deltaTime = 0;
     bool running;
     std::unique_ptr<DisplayManager> displayManager;
-    Scene *currentScene;
+    std::unique_ptr<Scene> currentScene;
+    std::unique_ptr<InputHandler> inputHandler;
 };
 
 #endif // GAMECONTROLLER_HPP
