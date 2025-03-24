@@ -12,25 +12,18 @@ void InputHandler::init() {
 }
 
 void InputHandler::update() {
-    // This just sets inputState
-    inputState = getInputState();
+    keyboardHandler->update();
+    getInputState();
 }
 
-void InputHandler::postUpdate() { keyboardHandler->run(); }
+void InputHandler::postUpdate() { keyboardHandler->postUpdate(); }
 
 void InputHandler::handleInput(SDL_Event &event) {
     // Handle input from all input handlers
     keyboardHandler->handleInput(event);
 }
 
-std::unordered_map<
-    std::string,
-    std::unordered_map<std::string, std::unordered_map<SDL_Keycode, bool>>>
-InputHandler::getInputState() {
-    std::unordered_map<
-        std::string,
-        std::unordered_map<std::string, std::unordered_map<SDL_Keycode, bool>>>
-        state;
-    state["keyboard"] = keyboardHandler->getKeyboardState();
-    return state;
+void InputHandler::getInputState() {
+    inputState.clear();
+    inputState["keyboard"] = keyboardHandler->keyboardState;
 }

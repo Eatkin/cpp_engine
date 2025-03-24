@@ -22,11 +22,7 @@ class InputHandler {
         inputState;
 
   private:
-    // Gross, but it works
-    std::unordered_map<
-        std::string,
-        std::unordered_map<std::string, std::unordered_map<SDL_Keycode, bool>>>
-    getInputState();
+    void getInputState();
     std::unique_ptr<KeyboardHandler> keyboardHandler;
 };
 

@@ -10,7 +10,9 @@ void KeyboardHandler::init() {
     std::cout << "KeyboardHandler initialized" << std::endl;
 }
 
-void KeyboardHandler::run() {
+void KeyboardHandler::update() { getKeyboardState(); }
+
+void KeyboardHandler::postUpdate() {
     // Clear the key pressed and released states
     keys_pressed.clear();
     keys_released.clear();
@@ -41,12 +43,9 @@ void KeyboardHandler::handleInput(SDL_Event &event) {
     }
 }
 
-std::unordered_map<std::string, std::unordered_map<SDL_Keycode, bool>>
-KeyboardHandler::getKeyboardState() {
-    std::unordered_map<std::string, std::unordered_map<SDL_Keycode, bool>>
-        state;
-    state["pressed"] = keys_pressed;
-    state["released"] = keys_released;
-    state["held"] = keys_held;
-    return state;
+void KeyboardHandler::getKeyboardState() {
+    keyboardState.clear();
+    keyboardState["pressed"] = keys_pressed;
+    keyboardState["released"] = keys_released;
+    keyboardState["held"] = keys_held;
 }
