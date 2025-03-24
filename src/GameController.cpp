@@ -53,8 +53,16 @@ void GameController::handleEvents() {
     }
 }
 
+std::unordered_map<
+    std::string,
+    std::unordered_map<std::string, std::unordered_map<SDL_Keycode, bool>>> &
+GameController::getInputState() {
+    return inputHandler->inputState;
+}
+
 // Logic for updating game state goes here
 void GameController::update() {
+    inputHandler->update();
     // Calculate deltaTime
     auto now = std::chrono::steady_clock::now();
     std::chrono::duration<float> elapsedTime = now - lastTime;
@@ -73,7 +81,7 @@ void GameController::postUpdate() {
     // Input handler update goes at the end to ensure pressed/release states are
     // accurate and reset
     if (inputHandler) {
-        inputHandler->run();
+        inputHandler->postUpdate();
     }
 }
 

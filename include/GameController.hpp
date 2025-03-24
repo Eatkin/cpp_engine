@@ -18,6 +18,10 @@ class GameController {
 
     void run();                                       // Starts the game loop
     float getDeltaTime() { return this->deltaTime; }; // Delta time getter
+    std::unordered_map<
+        std::string, std::unordered_map<
+                         std::string, std::unordered_map<SDL_Keycode, bool>>> &
+    getInputState();
 
   private:
     void init();                 // Initializes SDL and the window

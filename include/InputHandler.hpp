@@ -12,16 +12,21 @@ class InputHandler {
     ~InputHandler();
 
     void init();
-    void run();
+    void update();
+    void postUpdate();
+    void handleInput(SDL_Event &event);
+    // Gross, but it works
+    std::unordered_map<
+        std::string,
+        std::unordered_map<std::string, std::unordered_map<SDL_Keycode, bool>>>
+        inputState;
 
+  private:
     // Gross, but it works
     std::unordered_map<
         std::string,
         std::unordered_map<std::string, std::unordered_map<SDL_Keycode, bool>>>
     getInputState();
-    void handleInput(SDL_Event &event);
-
-  private:
     std::unique_ptr<KeyboardHandler> keyboardHandler;
 };
 

@@ -11,7 +11,12 @@ void InputHandler::init() {
     std::cout << "InputHandler initialized" << std::endl;
 }
 
-void InputHandler::run() { keyboardHandler->run(); }
+void InputHandler::update() {
+    // This just sets inputState
+    inputState = getInputState();
+}
+
+void InputHandler::postUpdate() { keyboardHandler->run(); }
 
 void InputHandler::handleInput(SDL_Event &event) {
     // Handle input from all input handlers

@@ -47,9 +47,21 @@ void Rectangle::render() {
 
 void Rectangle::update() {
     Entity::update();
+
+    // Get our input components
+    auto &input = gameController->getInputState();
+    auto right = input["keyboard"]["held"][SDLK_RIGHT];
+    auto left = input["keyboard"]["held"][SDLK_LEFT];
+    auto up = input["keyboard"]["held"][SDLK_UP];
+    auto down = input["keyboard"]["held"][SDLK_DOWN];
+    // yeah this is gross whatever it works and never needs to be touched again
+    int hinput = right ? left ? 0 : 1 : left ? -1 : 0;
+    int vinput = down ? up ? 0 : 1 : up ? -1 : 0;
+    int speed = 100;
+
     auto *position = getComponent<PositionComponent>();
-    position->x += deltaTime * 100;
-    position->y += deltaTime * 100;
+    position->x += deltaTime * hinput * speed;
+    position->y += deltaTime * vinput * speed;
     auto [x, y] = getPosition();
 }
 void Rectangle::clean() { Entity::clean(); }
