@@ -17,6 +17,7 @@ class Entity {
 
     template <typename T, typename... Args> T *addComponent(Args &&...args) {
         auto component = std::make_unique<T>(std::forward<Args>(args)...);
+        component->setOwner(this);
         T *ptr = component.get();
         components.push_back(std::move(component));
         return ptr;

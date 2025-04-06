@@ -8,20 +8,6 @@ But trying to think of how to keep it really organised and modular and future-pr
 
 ## What to Actually Do
 
-### Set Up Input Handling
-
-* InputController: Create a general InputController class.
-* Sub-classes: KeyboardController, MouseController, GameController
-* Implement basic methods like keyPressed(), keyHeld(), keyReleased().
-* Entity Integration: Pass input data to entities via handleInput() methods.
-* This will give entities access to input without needing to directly query SDL.
-
-### GameController Integration
-
-* Add InputController (or KeyboardController) as an attribute of GameController.
-* GameController should initialize and manage the InputController instance.
-* Implement a way for the GameController to pass relevant input data to the Scene (scene references GameController so it can access input data also).
-
 ### Components and Animators
 #### Create Component Base Class:
 

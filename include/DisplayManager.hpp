@@ -11,7 +11,6 @@ class DisplayManager {
 
     void clear();
     void present();
-    void drawRect(int x, int y, int w, int h);
 
     // Getter functions
     SDL_Window *getWindow() const { return window; }

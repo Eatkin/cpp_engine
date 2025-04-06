@@ -44,9 +44,3 @@ void DisplayManager::clear() {
 }
 
 void DisplayManager::present() { SDL_RenderPresent(renderer); }
-
-void DisplayManager::drawRect(int x, int y, int w, int h) {
-    SDL_Rect rect = {x, y, w, h};
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Red
-    SDL_RenderFillRect(renderer, &rect);
-}

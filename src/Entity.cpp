@@ -24,8 +24,9 @@ void Entity::update() {
 }
 
 void Entity::render() {
+    auto renderer = displayManager->getRenderer();
     for (auto &component : components) {
-        component->render();
+        component->render(renderer);
     }
 }
 

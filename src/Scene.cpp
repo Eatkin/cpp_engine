@@ -2,7 +2,7 @@
 #include "DisplayManager.hpp"
 #include "Entity.hpp"
 #include "GameController.hpp"
-#include "objects/Rectangle.hpp"
+#include "objects/BallDude.hpp"
 #include <algorithm>
 
 Scene::Scene(DisplayManager *displayManager, GameController *gameController)
@@ -14,9 +14,9 @@ Scene::Scene(DisplayManager *displayManager, GameController *gameController)
 Scene::~Scene() { clean(); }
 
 void Scene::init() {
-    auto rectangle = std::make_unique<Rectangle>(
-        displayManager, gameController, 0, 0, 100, 100, 255, 0, 0, 255);
-    addEntity(std::move(rectangle));
+    auto ballDude =
+        std::make_unique<BallDude>(displayManager, gameController, 200, 200);
+    addEntity(std::move(ballDude));
 }
 
 void Scene::update() {
